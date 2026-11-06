@@ -32,7 +32,7 @@ The app requires Android 7.0 (API 24) or newer.
 - JDK 25.
 - Android Studio with support for Android Gradle Plugin 9.5.1, or Android SDK
   command-line tools.
-- Android SDK Platform 37.
+- Android SDK Platform 37.0 (`platforms;android-37.0` in `sdkmanager`).
 - An Android emulator or device for instrumentation tests.
 
 The project includes the Gradle 9.6.0 wrapper; a separate Gradle installation is
@@ -105,7 +105,7 @@ serial before running the command.
 
 The [Android CI workflow](./.github/workflows/android.yml) runs on pushes, pull
 requests, and manual dispatch. It checks out both projects, configures JDK 25
-and Android SDK Platform 37, and runs unit and instrumentation tests on an
+and Android SDK Platform 37.0, and runs unit and instrumentation tests on an
 API 36 x86_64 emulator. Test reports are uploaded as the
 `android-test-reports` artifact when available.
 

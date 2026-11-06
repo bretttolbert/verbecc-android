@@ -37,7 +37,7 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
         with:
-          packages: platform-tools platforms;android-37
+          packages: platform-tools platforms;android-37.0
 
       - name: Run unit and instrumentation tests
         uses: reactivecircus/android-emulator-runner@v2
