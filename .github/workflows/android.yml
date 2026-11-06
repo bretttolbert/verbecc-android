@@ -1,0 +1,59 @@
+name: Android CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Android project
+        uses: actions/checkout@v4
+        with:
+          path: verbecc-android
+
+      - name: Check out verbecc-java
+        uses: actions/checkout@v4
+        with:
+          repository: bretttolbert/verbecc-java
+          path: verbecc-java
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "25"
+          cache: gradle
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK platform
+        run: sdkmanager "platforms;android-37"
+
+      - name: Run unit and instrumentation tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 36
+          arch: x86_64
+          disable-animations: true
+          script: cd verbecc-android && ./gradlew --no-daemon testDebugUnitTest connectedDebugAndroidTest
+
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-test-reports
+          path: |
+            verbecc-android/app/build/reports/tests/
+            verbecc-android/app/build/outputs/androidTest-results/
+          if-no-files-found: ignore
