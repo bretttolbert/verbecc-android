@@ -36,9 +36,8 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
-
-      - name: Install Android SDK platform
-        run: sdkmanager "platforms;android-37"
+        with:
+          packages: platform-tools platforms;android-37
 
       - name: Run unit and instrumentation tests
         uses: reactivecircus/android-emulator-runner@v2
