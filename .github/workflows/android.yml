@@ -15,6 +15,7 @@ concurrency:
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - name: Check out Android project
         uses: actions/checkout@v4
@@ -39,13 +40,27 @@ jobs:
         with:
           packages: platform-tools platforms;android-37.0
 
-      - name: Run unit and instrumentation tests
+      - name: Run unit tests
+        working-directory: verbecc-android
+        run: ./gradlew --no-daemon testDebugUnitTest
+
+      - name: Enable KVM acceleration
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+          test -r /dev/kvm && test -w /dev/kvm
+
+      - name: Run instrumentation tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 36
           arch: x86_64
+          disable-linux-hw-accel: false
+          emulator-boot-timeout: 300
           disable-animations: true
-          script: cd verbecc-android && ./gradlew --no-daemon testDebugUnitTest connectedDebugAndroidTest
+          pre-emulator-launch-script: $ANDROID_HOME/emulator/emulator -accel-check
+          script: cd verbecc-android && ./gradlew --no-daemon connectedDebugAndroidTest
 
       - name: Upload test reports
         if: always()

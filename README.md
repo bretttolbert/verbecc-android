@@ -109,6 +109,10 @@ and Android SDK Platform 37.0, and runs unit and instrumentation tests on an
 API 36 x86_64 emulator. Test reports are uploaded as the
 `android-test-reports` artifact when available.
 
+Unit tests run before emulator startup. The workflow enables KVM acceleration
+on the Linux runner and checks it before launching the emulator. Emulator boot
+is limited to five minutes, and the entire job is limited to 30 minutes.
+
 ## License
 
 ### GNU Lesser General Public License v3.0
