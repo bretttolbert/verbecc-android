@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Verbecc</string>
+    <string name="conjugation_description">Verb conjugation in six languages, available offline.</string>
+    <string name="language_label">Language</string>
+    <string name="language_catalan">Catalan</string>
+    <string name="language_spanish">Spanish</string>
+    <string name="language_french">French</string>
+    <string name="language_italian">Italian</string>
+    <string name="language_portuguese">Portuguese</string>
+    <string name="language_romanian">Romanian</string>
+    <string name="infinitive_label">Infinitive verb</string>
+    <string name="infinitive_hint">Enter a verb in the selected language</string>
+    <string name="conjugate">Conjugate</string>
+    <string name="conjugating">Conjugating...</string>
+    <string name="empty_results">Choose a language and enter an infinitive to see its moods and tenses.</string>
+    <string name="no_forms">No applicable forms.</string>
+    <string name="result_heading">%1$s (%2$s)</string>
+    <string name="error_blank_verb">Enter an infinitive verb.</string>
+    <string name="error_unknown_verb">Verb not found in this language. Check the infinitive and selected language.</string>
+    <string name="error_invalid_verb">This infinitive cannot be conjugated. Check its spelling and reflexive form.</string>
+    <string name="error_conjugation_data">Unable to conjugate this verb because of a dictionary error. Try another verb.</string>
+</resources>

@@ -1,0 +1,32 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Start Pixel_API_36",
+            "type": "process",
+            "command": "bash",
+            "args": [
+                "${workspaceFolder}/.vscode/start-emulator.sh"
+            ],
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "android-emulator",
+                "pattern": {
+                    "regexp": "^(.*):(\\d+): ERROR: (.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "message": 3
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^Starting Pixel_API_36$",
+                    "endsPattern": "^Pixel_API_36 ready$"
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            }
+        }
+    ]
+}
